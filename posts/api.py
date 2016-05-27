@@ -47,4 +47,11 @@ def post_delete(id):
         message = "Could not find post with id {}".format(id)
         data = json.dumps({"message": message})
         return Response(data, 404, mimetype="application/json")
+      
+    #session.query(models.Post).filter(id==id).delete()
+    session.delete(post)
+    session.commit()
+    
+    data = json.dumps(post.as_dictionary())
+    return Response(data, 200, mimetype="application/json")
     
